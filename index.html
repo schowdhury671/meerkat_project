@@ -105,6 +105,146 @@
 </nav>-->
 
 
+	<section class="hero">
+  <div style="margin-bottom:-80px" class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">MeLFusion: Synthesizing Music from Image and Language Cues using Diffusion Models</h1>
+		<h1 style="font-size:2vw"><font color="#ff0000"> <b> CVPR 2024 [Highlight, Top 2.8%] </b> </font></h1> <br>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://schowdhury671.github.io/">Sanjoy Chowdhury</a><sup>*1,3</sup>,</span>
+            <span class="author-block">
+              <a href="https://sayannag.github.io/">Sayan Nag</a><sup>*2,3</sup>,</span>
+            <span class="author-block">
+              <a href="https://josephkj.in/">Joseph K J</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://research.adobe.com/person/balaji-vasan-srinivasan/">Balaji Vasan Srinivasan</a><sup>3</sup>,
+            </span>
+			<span class="author-block">
+              <a href="https://www.cs.umd.edu/people/dmanocha/">Dinesh Manocha</a><sup>1</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>University of Maryland,</span>
+            <span class="author-block"><sup>2</sup>University of Toronto,</span>
+			<span class="author-block"><sup>3</sup>Adobe Research</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+			  <!--
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span> -->
+              <span class="link-block">
+                <a href="https://openaccess.thecvf.com/content/CVPR2024/papers/Chowdhury_MeLFusion_Synthesizing_Music_from_Image_and_Language_Cues_using_Diffusion_CVPR_2024_paper.pdf"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://youtu.be/_CNJeiYwLsE?si=1QnqvgwbC6lq_86e"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+			  <!--  Link. -->
+              <span class="link-block">
+                <a href="https://umd0-my.sharepoint.com/:f:/g/personal/sanjoyc_umd_edu/Eok6RG9QIZhNlGubG8-VsDIBhNMK6OOVAWuHpryEC3VnJw"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fa fa-database"></i>
+                  </span>
+                  <span>Dataset</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/schowdhury671/melfusion/tree/main"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+			  <!--
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+				 -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    
+	<!-- TL;DR. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">TL;DR</h2>
+		<center>
+        <div class="content has-text-justified" style='width:750px'>
+          <p>
+            Coming soon!
+          </p>
+        </div>
+		</center>
+      </div>
+    </div>
+	
+</div>
+</section>
+    <!--/ TL;DR. -->
+	
+<!--   <section class="columns is-vcentered interpolation-panel" width=100%>
+  <div class="container is-max-desktop">
+    <div class="hero-body" style='margin-top:-25px;margin-bottom:-25px'>
+	<center>
+      <h2 class="title is-3">MelFusion Framework</h2>
+      <img src="./static/images/Main_System.png"
+                 class="interpolation-image" width=80%/></center>
+      <p class="content has-text-justified">
+		Our approach MeLFusion generates music waveform $w$ conditioned on an image $I$ and a given textual instruction $Y$. 
+		Visual semantics from  $I$ is instilled into a text-to-music diffusion model (bottom green box) using a pre-trained and frozen text-to-image diffusion model (top blue box). 
+		The image $I$ is first DDIM inverted into a noisy latent $z^I_T$. The self-attention features from the decoder layers of the text-to-image LDM that consumes $z^I_T$ is infused into the cross-attention features of text-to-music LDM decoder layers, modulated by learned $\alpha$ parameters. 
+        This fusion operation that happens in the decoder (green stripes) is detailed on the right side of the figure. 
+		The music encoder projects the spectrogram representation of the music to the latent space, and the music decoder retrieves back the spectrograms. Finally, a vocoder generates the waveform $w$ from the spectrograms. 
+		Please refer to Section 3 in the manuscript for more details.
+      </p>
+    </div>
+  </div>
+  </section> -->
 
 
 <section class="section" id="BibTeX">
