@@ -6,7 +6,7 @@
         content="">
   <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>MeLFusion: Synthesizing Music from Image and Language Cues using Diffusion Models</title>
+  <title>Meerkat: Audio-Visual Large Language Model for Grounding in Space and Time</title>
 	
  
   <script type="text/x-mathjax-config">
@@ -240,16 +240,16 @@
   <div class="container is-max-desktop">
     <div class="hero-body" style='margin-top:-25px;margin-bottom:-25px'>
 	<center>
-      <h2 class="title is-3">MelFusion Framework</h2>
-      <img src="./static/images/Main_System.png"
+      <!-- <h2 class="title is-3">MelFusion Framework</h2> -->
+      <img src="./static/images/meerkat_teaser_transparent.png"
                  class="interpolation-image" width=80%/></center>
       <p class="content has-text-justified">
-		Our approach MeLFusion generates music waveform $w$ conditioned on an image $I$ and a given textual instruction $Y$. 
-		Visual semantics from  $I$ is instilled into a text-to-music diffusion model (bottom green box) using a pre-trained and frozen text-to-image diffusion model (top blue box). 
-		The image $I$ is first DDIM inverted into a noisy latent $z^I_T$. The self-attention features from the decoder layers of the text-to-image LDM that consumes $z^I_T$ is infused into the cross-attention features of text-to-music LDM decoder layers, modulated by learned $\alpha$ parameters. 
-        This fusion operation that happens in the decoder (green stripes) is detailed on the right side of the figure. 
-		The music encoder projects the spectrogram representation of the music to the latent space, and the music decoder retrieves back the spectrograms. Finally, a vocoder generates the waveform $w$ from the spectrograms. 
-		Please refer to Section 3 in the manuscript for more details.
+        We present Meerkat, an audio-visual LLM that can effectively ground
+        both spatially and temporally in image and audio. Our model is adept in tasks
+        that require fine-grained understanding such as Audio Referred Image Grounding,
+        Image Guided (IG) Audio Temporal Localization & Audio-Visual (AV) Fact-checking.
+        It can also be extended to perform coarse-grained tasks like AVQA
+        & AV Captioning.
       </p>
     </div>
   </div>
@@ -285,8 +285,8 @@
 </section>
 
 <section class="section">
-  <div class="container is-max-desktop" style="margin-top:-90px">
-  <center><h2 class="title is-3">Dataset Examples</h2></center><br>
+  <div class="container is-max-desktop" >
+    <center><h2 class="title is-3">Meerkat Architecture</h2></center><br>
 
     <div class="columns is-centered">
 
@@ -294,23 +294,102 @@
       <div class="column" >
         <div class="content">
           <!-- <center><h1 style="font-size: 25px; color:brown" " class="title is-3"></h1></center> -->
-          <img src="static/images/dataset_samples/dataset_1.jpg" height=100%/>
+          <img src="static/images/arch.png" height=100%/>
+          <p class="content has-text-justified">
+            <b>Overview of Meerkat.</b> Our model is equipped with fine-grained audiovisual comprehension abilities. When fed with image I, audio A pairs, the Audio-Visual
+            Optimal Transport alignment (AVOpT) module B learns the patch-wise image-audio
+            association to facilitate weak alignment between the two modalities by minimizing
+            the patch-level Wasserstein distance. Subsequently, the Audio-Visual Attention Consistency Enforcement (AVACE) module A maximizes the region-level alignment by
+            confining the cross-modal attention maps around the objects of interest and minimizing the association with the background. After tokenizing the text instruction T, the
+            modality-specific latents (z˜I , z˜A, zT ) are passed to the instruction tuned Llama 2 model
+            which serves as a unified interface for the downstream tasks. We employ a LoRA-based
+            fine-tuning of the LLM.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="container pt-3">
+      <div class="columns is-centered has-text-centered">
+          <h2 class="title is-3">Qualitative Results of Meerkat</h2>
+        </div>
+      </div>
+
+  <div class="column is-centered">
+    <div class="column" >
+    <div class="content">
+      <!-- <center><h1 style="font-size: 25px; color:brown" " class="title is-3"></h1></center> -->
+      <img src="static/images/qualitative_results_v15.png" width=100%/>
+    </div>
+  </div>
+  </div>
+
+<section class="section">
+  <div class="container is-max-desktop" >
+    <center><h2 class="title is-3">AVFIT Dataset Distribution</h2></center><br>
+
+    <div class="columns is-centered">
+
+      <!-- Visual Effects. -->
+      <div class="column" >
+        <div class="content">
+          <!-- <center><h1 style="font-size: 25px; color:brown" " class="title is-3"></h1></center> -->
+          <img src="static/images/dataset_dist.png" height=100%/>
+          <p class="content has-text-justified">
+          Task-wise dataset distribution. The bi-coloured cells denote collections of paired
+          image-audio samples from public datasets following our data curation strategy while
+          single-coloured cells signify direct adaptation. Datasets with dashed outlines are used
+          only during model training while the ones with 
+          <span style="font-size:100%;color:rgb(4, 47, 178);">&bigstar;</span>
+          are reserved for zero-shot evaluations.
+          Other datasets have a defined train/test split. Numbers in the bottom right represent
+          the total #samples present in each task.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+      
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <center><h2 class="title is-3">AVFIT Statistics</h2></center><br>
+    <div class="columns is-centered">
+      
+
+      <!-- Visual Effects. -->
+      <div class="column" >
+        <div class="content">
+          <!-- <center><h1 style="font-size: 25px; color:brown" " class="title is-3"></h1></center> -->
+          <img src="static/images/stat_1.png" height=100%/>
+          <img src="static/images/stat_2.png" height=100%/>
+          <img src="static/images/stat_3.png" height=100%/>
         </div>
       </div>
       <!--/ Visual Effects. -->
 
       <!-- Matting. -->
-      <div class="column" >
-        <div class="content">
+      <!-- <div class="column" >
+        <div class="content"> -->
           <!-- <center><h1 style="font-size: 25px; color:brown" " class="title is-3"></h1></center> -->
-          <img src="static/images/dataset_samples/dataset_2.jpg" height=100%/>
+          <!-- <img src="static/images/dataset_samples/dataset_2.jpg" height=100%/>
         </div>
-      </div>
-      </div>
-	  <div class="content" style="margin-top:-20px">
+      </div> -->
+      <!-- </div>
+	      <div class="content" style="margin-top:-20px"> -->
           <!-- <center><h1 style="font-size: 25px; color:brown" " class="title is-3"></h1></center> -->
-          <center><img src="static/images/dataset_samples/dataset_3.png" height=100% width=98%/></center>
-        </div>
+          <!-- <center><img src="static/images/dataset_samples/dataset_3.png" height=100% width=98%/></center>
+        </div> -->
     </div>
 
   </div>
@@ -318,13 +397,9 @@
 
     
   <!-- TL;DR. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="container is-max-desktop">
-        <h2 class="title is-3">Qualitative Results of MeLFusion</h2>
-      </div>
-    </div>
+  
 
-<section class="hero is-light is-small">
+<!-- <section class="hero is-light is-small">
   <div class="hero-body">
     <div class="container is-max-desktop">
       <div class="container pt-3">
@@ -352,12 +427,11 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
-<section class="section">
+<!-- <section class="section">
   <div class="container is-max-desktop">
     
-  <!-- TL;DR. -->
     <div class="columns is-centered has-text-centered">
       <div class="container is-max-desktop">
         <h2 class="title is-3">MeLFusion Ablations</h2>
@@ -365,9 +439,9 @@
     </div>
   
 </div>
-</section>
+</section> -->
 
-<section class="hero is-light is-small">
+<!-- <section class="hero is-light is-small">
   <div class="hero-body">
     <div class="container is-max-desktop">
 	<center><h2 class="title is-3">Example 1</h2></center>
@@ -427,13 +501,13 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <section class="section">
   <div class="container is-max-desktop">
     
   <!-- TL;DR. -->
-    <div class="columns is-centered has-text-centered">
+    <!-- <div class="columns is-centered has-text-centered">
       <div class="container is-max-desktop">
         <h2 class="title is-3">Comparison of MeLFusion with other approaches</h2>
       </div>
@@ -470,7 +544,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content" style="margin-top:0px">
